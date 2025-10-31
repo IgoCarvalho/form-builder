@@ -46,8 +46,11 @@ export async function register(formData: RegisterFormData) {
       success: true,
     };
   } catch (error) {
+    console.error('@Register Error =>', { error });
+    
     return {
       success: false,
+      error
     };
   }
 }
