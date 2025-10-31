@@ -1,4 +1,5 @@
-import { LogOutIcon, UserIcon } from "lucide-react";
+import { auth, signOut } from "@/auth";
+import { LogOutIcon, User2Icon, UserIcon } from "lucide-react";
 import { Avatar, AvatarFallback } from "./ui/avatar";
 import {
   DropdownMenu,
@@ -9,15 +10,19 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-import { Button } from "./ui/button";
-import { signOut } from "@/auth";
 
-export function UserButton() {
+export async function UserButton() {
+  const session = await auth();
+
+  if (!session?.user) return null;
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
         <Avatar className="size-9">
-          <AvatarFallback>CN</AvatarFallback>
+          <AvatarFallback>
+            <User2Icon className="size-5" />
+          </AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent
@@ -28,12 +33,16 @@ export function UserButton() {
         <DropdownMenuLabel className="p-0 font-normal">
           <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
             <Avatar className="size-8 rounded-lg">
-              <AvatarFallback className="rounded-lg">TB</AvatarFallback>
+              <AvatarFallback className="rounded-lg">
+                <User2Icon className="size-4" />
+              </AvatarFallback>
             </Avatar>
             <div className="grid flex-1 text-left text-sm leading-tight">
-              <span className="truncate font-semibold">Igo Silva</span>
+              <span className="truncate font-semibold">
+                {session.user.fullname}
+              </span>
               <span className="text-muted-foreground truncate text-xs">
-                @igosilva
+                @{session.user.name}
               </span>
             </div>
           </div>

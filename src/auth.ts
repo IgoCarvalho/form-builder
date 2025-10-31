@@ -1,8 +1,16 @@
 import prisma from "@/lib/prisma";
 import { compare } from "bcrypt-ts";
-import NextAuth from "next-auth";
+import NextAuth, { DefaultSession } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { z } from "zod";
+
+declare module "next-auth" {
+  interface Session {
+    user: {
+      fullname: string;
+    } & DefaultSession["user"];
+  }
+}
 
 export const { auth, signIn, signOut, handlers } = NextAuth({
   pages: {
@@ -13,12 +21,14 @@ export const { auth, signIn, signOut, handlers } = NextAuth({
     jwt({ token, user }) {
       if (user) {
         token.id = user.id;
+        token.fullname = (user as any)?.fullname || "";
       }
 
       return token;
     },
     session({ session, token }) {
       session.user.id = token.id as string;
+      session.user.fullname = (token?.fullname as string) || "";
 
       return session;
     },

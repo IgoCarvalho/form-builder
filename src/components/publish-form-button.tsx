@@ -50,7 +50,7 @@ export function PublishFormButton({ formId }: PublishFormButtonProps) {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button className="gap-2 text-white bg-gradient-to-r from-indigo-400 to-cyan-400">
+        <Button className="gap-2 text-lime-950 font-bold bg-gradient-to-r from-lime-300 to-lime-400">
           <Upload className="size-5" />
           Publish
         </Button>

@@ -27,8 +27,11 @@ import Link from "next/link";
 import { toast } from "sonner";
 import { RegisterFormData, RegisterSchema } from "@/schemas/auth";
 import { LoaderIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function RegisterPage() {
+  const router = useRouter();
+
   const form = useForm<RegisterFormData>({
     resolver: zodResolver(RegisterSchema),
     defaultValues: {
@@ -44,7 +47,12 @@ export default function RegisterPage() {
 
       if (!response.success) {
         toast.warning("Problem", { description: response.message });
+        return;
       }
+
+      toast.success("Success", { description: "Account created successfully" });
+
+      router.push("/login");
     } catch (error) {
       if (isRedirectError(error)) {
         return;
@@ -72,12 +80,27 @@ export default function RegisterPage() {
             <div className="space-y-2">
               <FormField
                 control={form.control}
+                name="fullname"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Full Name</FormLabel>
+                    <FormControl>
+                      <Input placeholder="John Doe" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <div className="space-y-2">
+              <FormField
+                control={form.control}
                 name="name"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Username</FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter your username" {...field} />
+                      <Input placeholder="johndoe" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -94,7 +117,7 @@ export default function RegisterPage() {
                     <FormControl>
                       <Input
                         type="password"
-                        placeholder="Enter your password"
+                        placeholder="********"
                         {...field}
                       />
                     </FormControl>
