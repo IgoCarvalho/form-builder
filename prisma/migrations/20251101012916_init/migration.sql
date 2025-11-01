@@ -1,5 +1,5 @@
 -- CreateTable
-CREATE TABLE "public"."User" (
+CREATE TABLE "User" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "fullname" TEXT NOT NULL DEFAULT '',
@@ -9,7 +9,7 @@ CREATE TABLE "public"."User" (
 );
 
 -- CreateTable
-CREATE TABLE "public"."Form" (
+CREATE TABLE "Form" (
     "id" SERIAL NOT NULL,
     "userId" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -25,7 +25,7 @@ CREATE TABLE "public"."Form" (
 );
 
 -- CreateTable
-CREATE TABLE "public"."FormSubmissions" (
+CREATE TABLE "FormSubmissions" (
     "id" SERIAL NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "formId" INTEGER NOT NULL,
@@ -35,13 +35,13 @@ CREATE TABLE "public"."FormSubmissions" (
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "User_name_key" ON "public"."User"("name");
+CREATE UNIQUE INDEX "User_name_key" ON "User"("name");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Form_shareURL_key" ON "public"."Form"("shareURL");
+CREATE UNIQUE INDEX "Form_shareURL_key" ON "Form"("shareURL");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Form_name_userId_key" ON "public"."Form"("name", "userId");
+CREATE UNIQUE INDEX "Form_name_userId_key" ON "Form"("name", "userId");
 
 -- AddForeignKey
-ALTER TABLE "public"."FormSubmissions" ADD CONSTRAINT "FormSubmissions_formId_fkey" FOREIGN KEY ("formId") REFERENCES "public"."Form"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "FormSubmissions" ADD CONSTRAINT "FormSubmissions_formId_fkey" FOREIGN KEY ("formId") REFERENCES "Form"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

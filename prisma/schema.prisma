@@ -2,8 +2,8 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider   = "prisma-client"
-  engineType = "client"
+  provider   = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl", "rhel-openssl-3.0.x"]
   output   = "../src/generated/prisma"
 }
 
