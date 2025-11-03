@@ -1,7 +1,7 @@
 "use client";
 
 import { useDesigner } from "@/hooks/useDesigner";
-import { Form } from "@/generated/prisma";
+import { Form } from "@prisma/client";
 import {
   DndContext,
   MouseSensor,

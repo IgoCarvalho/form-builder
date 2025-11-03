@@ -1,4 +1,4 @@
-import { Form } from "@/generated/prisma";
+import { Form } from "@prisma/client";
 import { formatDistance } from "date-fns";
 import { ArrowRight, Edit, NotepadText, ViewIcon } from "lucide-react";
 import { Badge } from "./ui/badge";
