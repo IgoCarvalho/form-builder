@@ -2,9 +2,7 @@ import prisma from "@/lib/prisma";
 import { compare } from "bcrypt-ts";
 import NextAuth, { DefaultSession } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-import { NextResponse } from "next/server";
 import * as z from "zod";
-import { verifyPublicRoute } from "./lib/route-guard";
 
 declare module "next-auth" {
   interface Session {
@@ -20,25 +18,6 @@ export const { auth, signIn, signOut, handlers } = NextAuth({
     signOut: "/register",
   },
   callbacks: {
-    authorized({ request, auth }) {
-      const nextUrl = request.nextUrl;
-      const isLoggedIn = !!auth;
-      const routeConfig = verifyPublicRoute(nextUrl.pathname);
-
-      const isInPublicRoute = !!routeConfig;
-
-      if (isInPublicRoute) {
-        if (isLoggedIn && routeConfig.redirect)
-          return NextResponse.redirect(new URL("/", nextUrl.origin));
-        return true;
-      }
-
-      if (isLoggedIn) {
-        return true;
-      }
-
-      return false;
-    },
     jwt({ token, user }) {
       if (user) {
         token.id = user.id;
