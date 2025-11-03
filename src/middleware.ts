@@ -1,10 +1,10 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
+import { auth } from "./auth";
 import { verifyPublicRoute } from "./lib/route-guard";
 
-export const middleware = (req: NextRequest) => {
+export default auth((req) => {
   const nextUrl = req.nextUrl;
-  const authCookie = req.cookies.get("authjs.session-token");
-  const isLoggedIn = !!authCookie;
+  const isLoggedIn = !!req.auth;
   const routeConfig = verifyPublicRoute(nextUrl.pathname);
 
   const isInPublicRoute = !!routeConfig;
@@ -20,7 +20,7 @@ export const middleware = (req: NextRequest) => {
   }
 
   return NextResponse.redirect(new URL("/login", nextUrl.origin));
-};
+});
 
 export const config = {
   matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
