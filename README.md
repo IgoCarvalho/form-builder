@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Form Builder
 
-## Getting Started
+Form Builder is a web application that allows users to create and manage forms. It provides a user-friendly interface for designing and customizing forms, as well as features for managing form submissions and analyzing form data.
 
-First, run the development server:
+![Form Builder Screenshot](./docs/form-builder-preview.webp)
+![Form Submitter Screenshot](./docs/form-submitter-preview.webp)
+
+## 🔑 Key Features
+
+- Design and customize forms using a drag-and-drop interface.
+- Add various form elements such as text fields, checkboxes, radio buttons, and more.
+- Set validation rules for form fields.
+- Preview and test forms before publishing.
+- Manage form submissions and view analytics.
+
+## 📋 Requirements
+
+Before running this project, ensure you have the following installed on your system:
+
+### Database Configuration
+
+This project is configured to use **PostgreSQL** as the database, you can use the `docker-compose.yml` file provided in the project for easy database setup:
+
+```bash
+docker compose up -d
+```
+
+**The database will be available at:**
+
+- Host: `localhost`
+- Port: `5432`
+- Database: `formbuilder`
+- Username: `formbuilder`
+- Password: `formbuilder`
+
+## 🛠️ Installation & Setup
+
+**1. Clone the Repository**
+
+```bash
+git clone https://github.com/IgoCarvalho/form-builder.git
+cd form-builder
+```
+
+**2. Install Dependencies**
+
+```bash
+# Using PNPM (recommended)
+pnpm install
+
+# Using Yarn
+yarn install
+
+# Using NPM
+npm install
+```
+
+**3. Create a `.env` file based on `.env.example`**
+
+```bash
+cp .env.example .env
+```
+
+**4. Run Database Migrations**
+
+```bash
+npx prisma migrate dev
+```
+
+**5. Run the Application**
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+🎉 **The applications will be available at**: http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+<p align="center">
+  Made with 💜 by <a href="https://github.com/IgoCarvalho">Igo Carvalho</a>
+</p>
